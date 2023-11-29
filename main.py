@@ -1,22 +1,12 @@
-
-
-
 class Brand:
     def __init__(self, brand_id, brand_name, model_id):
         self.Brand_ID = brand_id
         self.Brand_Name = brand_name
         self.Model_ID = model_id
 
-class ShippingtoBrand:
-    def __init__(self, shipping_to_brand_id, brand_id, rma_id, send_date_of_packet):
-        self.ShippingtoBrand_ID = shipping_to_brand_id
-        self.Brand_ID = brand_id
-        self.RMA_ID = rma_id
-        self.SendDateofPacket = send_date_of_packet
-
-class Technican:
-    def __init__(self, technican_id, tech_name, tech_qual):
-        self.Tachnican_ID = technican_id
+class Technician:
+    def __init__(self, technician_id, tech_name, tech_qual):
+        self.Technician_ID = technician_id
         self.TechName = tech_name
         self.TechQual = tech_qual
 
@@ -36,23 +26,15 @@ class Model:
         self.Product_ID = product_id
 
 class Product:
-    def __init__(self, product_id, model_id, technican_id, customer_id, rma_id, product_sold_date):
+    def __init__(self, product_id, model_id, technician_id, customer_id, rma_id, product_sold_date):
         self.Product_ID = product_id
         self.Model_ID = model_id
-        self.Technican_ID = technican_id
+        self.Technician_ID = technician_id
         self.Customer_ID = customer_id
         self.RMA_ID = rma_id
         self.ProductSoldDate = product_sold_date
-
-class ReturntoCustomer:
-    def __init__(self, return_shipping_id, send_date_of_packet, customer_id, rma_id):
-        self.ReturnShipping_ID = return_shipping_id
-        self.SendDateofPacket = send_date_of_packet
-        self.Customer_ID = customer_id
-        self.RMA_ID = rma_id
-
 class RMA:
-    def __init__(self, rma_id, inspection_start_date, inspection_completion_date, product_defect, brand_id, model_id, product_id, check_issue, result_issue, technican_id):
+    def __init__(self, rma_id, inspection_start_date, inspection_completion_date, product_defect, brand_id, model_id, product_id, check_issue, result_issue, technician_id):
         self.RMA_ID = rma_id
         self.InspactionStartDate = inspection_start_date
         self.InspecitonCompletionDate = inspection_completion_date
@@ -62,5 +44,22 @@ class RMA:
         self.Product_ID = product_id
         self.CheckIssue = check_issue
         self.ResultIssue = result_issue
-        self.Technican_ID = technican_id
+        self.Technician_ID = technician_id
 
+class Shipping:
+    def __init__(self, rma_id, shipping_date):
+        self.RMA_ID = rma_id
+        self.Shipping_Date = shipping_date
+
+class ShippingtoBrand(Shipping):
+    def __init__(self, shipping_to_brand_id, return_info,brand_id ):
+        super().__init__(rma_id, shipping_date)
+        self.Brand_ID = brand_id
+    self.Shipping_to_brand_id=shipping_to_brand_id
+  
+
+class ReturntoCustomer(Shipping):
+    def __init__(self, shipping_to_customer_id, customer_id):
+        super().__init__(rma_id, shipping_date)
+        self.Customer_ID = customer_id
+        self.Shipping_to_custome_id=shipping_to_custome_id
